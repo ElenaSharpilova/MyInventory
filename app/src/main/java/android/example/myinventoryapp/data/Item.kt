@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.text.NumberFormat
 
-@Entity
+@Entity(tableName = "table_items")
 data class Item(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,

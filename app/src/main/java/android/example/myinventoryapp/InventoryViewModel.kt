@@ -61,6 +61,12 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         }
     }
 
+    fun deleteAllItems(){
+        viewModelScope.launch {
+            itemDao.deleteAll()
+        }
+    }
+
     //Получить элемент из репозитория
     fun retrieveItem(id: Int): LiveData<Item> {
         return itemDao.getItem(id).asLiveData()

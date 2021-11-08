@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ItemDao {
 
-    @Query("SELECT * from item ORDER BY name ASC")
+    @Query("SELECT * from table_items ORDER BY name ASC")
     fun getItems(): Flow<List<Item>>
 
-    @Query("SELECT * from item WHERE id = :id")
+    @Query("SELECT * from table_items WHERE id = :id")
     fun getItem(id: Int): Flow<Item>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -25,4 +25,8 @@ interface ItemDao {
 
     @Delete
     suspend fun delete(item: Item)
+
+    @Query("DELETE FROM table_items")
+    suspend fun deleteAll()
+
 }
