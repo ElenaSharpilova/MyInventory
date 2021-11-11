@@ -50,36 +50,17 @@
             tools:text="500 som" />
 
 
-        <Button
-            android:id="@+id/btn_add"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@string/add"
-            app:layout_constraintStart_toEndOf="@+id/iv_icon"
-            app:layout_constraintTop_toTopOf="@+id/item_quantity" />
-
         <TextView
             android:id="@+id/item_quantity"
             style="@style/Widget.Inventory.ListItemTextView"
             android:layout_width="50dp"
-            android:layout_marginStart="8dp"
             android:fontFamily="sans-serif-medium"
 
             android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@+id/btn_add"
+            app:layout_constraintEnd_toEndOf="@+id/item_price"
+            app:layout_constraintStart_toStartOf="@+id/item_price"
             app:layout_constraintTop_toBottomOf="@+id/item_price"
             tools:text="3" />
-
-        <Button
-            android:id="@+id/btn_remove"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/remove"
-            app:layout_constraintStart_toEndOf="@+id/item_quantity"
-            app:layout_constraintTop_toBottomOf="@+id/item_price" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

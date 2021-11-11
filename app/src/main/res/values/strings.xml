@@ -21,4 +21,7 @@
     <string name="add_new_item">Add new item</string>
     <string name="add">+</string>
     <string name="remove">-</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="take_picture_description">Camera picture for sample app</string>
+    <string name="ok_button_title">OK</string>
 </resources>
