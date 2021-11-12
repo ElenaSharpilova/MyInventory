@@ -1,13 +1,11 @@
 package android.example.myinventoryapp.data
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import android.example.myinventoryapp.Converters
+import androidx.room.*
 
-@Database(entities = [Item::class],
-    version = 2,
-    exportSchema = false)
+@Database(entities = [Item::class], version = 2, exportSchema = false)
+//@TypeConverters(Converters::class)
 abstract class ItemRoomDatabase : RoomDatabase() {
 
     abstract fun itemDao(): ItemDao

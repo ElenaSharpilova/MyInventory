@@ -61,6 +61,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         }
     }
 
+    //Удаление всего списка
     fun deleteAllItems(){
         viewModelScope.launch {
             itemDao.deleteAll()

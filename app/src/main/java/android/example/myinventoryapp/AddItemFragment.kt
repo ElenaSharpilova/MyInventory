@@ -58,6 +58,7 @@ class AddItemFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? { _binding = FragmentAddItemBinding.inflate(inflater, container, false)
 
+        //Загружаем фото из галереи
         imageView = binding.uploadPhoto
         val getAction = registerForActivityResult(ActivityResultContracts.GetContent(),
         ActivityResultCallback { uri ->
@@ -66,6 +67,7 @@ class AddItemFragment: Fragment() {
         binding.btnGallery.setOnClickListener {
             getAction.launch("image/*")
         }
+
         return binding.root
     }
 
