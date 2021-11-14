@@ -20,7 +20,8 @@ data class Item(
     @ColumnInfo(name = "quantity")
     val quantityInStock: Int,
 
-    //var itemImage: Bitmap? = null
+    @ColumnInfo(name = "image")
+    var itemImage: String?
 )
 
 fun Item.getFormattedPrice(): String =

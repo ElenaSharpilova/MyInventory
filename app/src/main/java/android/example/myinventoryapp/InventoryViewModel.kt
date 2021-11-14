@@ -20,9 +20,10 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         itemId: Int,
         itemName: String,
         itemPrice: String,
-        itemCount: String
+        itemCount: String,
+        itemImage: String
     ) {
-        val updatedItem = getUpdatedItemEntry(itemId, itemName, itemPrice, itemCount)
+        val updatedItem = getUpdatedItemEntry(itemId, itemName, itemPrice, itemCount, itemImage)
         updateItem(updatedItem)
     }
 
@@ -42,8 +43,8 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     }
 
     //Вставляет новый элемент в базу данных
-    fun addNewItem(itemName: String, itemPrice: String, itemCount: String) {
-        val newItem = getNewItemEntry(itemName, itemPrice, itemCount)
+    fun addNewItem(itemName: String, itemPrice: String, itemCount: String, itemImage: String) {
+        val newItem = getNewItemEntry(itemName, itemPrice, itemCount, itemImage)
         insertItem(newItem)
     }
 
@@ -74,19 +75,20 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     }
 
     //Возвращает true, если EditTexts не пустые
-    fun isEntryValid(itemName: String, itemPrice: String, itemCount: String): Boolean {
-        if (itemName.isBlank() || itemPrice.isBlank() || itemCount.isBlank()) {
+    fun isEntryValid(itemName: String, itemPrice: String, itemCount: String, itemImage: String): Boolean {
+        if (itemName.isBlank() || itemPrice.isBlank() || itemCount.isBlank() || itemImage.isBlank() ) {
             return false
         }
         return true
     }
 
     //Используется для добавления новой записи в базу данных которую добавил пользователь
-    private fun getNewItemEntry(itemName: String, itemPrice: String, itemCount: String): Item {
+    private fun getNewItemEntry(itemName: String, itemPrice: String, itemCount: String, itemImage: String): Item {
         return Item(
             itemName = itemName,
             itemPrice = itemPrice.toDouble(),
-            quantityInStock = itemCount.toInt()
+            quantityInStock = itemCount.toInt(),
+            itemImage = itemImage
         )
     }
 
@@ -96,13 +98,15 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         itemId: Int,
         itemName: String,
         itemPrice: String,
-        itemCount: String
+        itemCount: String,
+        itemImage: String
     ): Item {
         return Item(
             id = itemId,
             itemName = itemName,
             itemPrice = itemPrice.toDouble(),
-            quantityInStock = itemCount.toInt()
+            quantityInStock = itemCount.toInt(),
+            itemImage = itemImage
         )
     }
 }

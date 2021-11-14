@@ -40,14 +40,17 @@ class AddItemFragment: Fragment() {
     private var imageUri: Uri? = null
     private var imageView: ImageView? = null*/
 
-    lateinit var imageView: ImageView
+   // lateinit var imageView: ImageView
 
+    val REQUEST_IMAGE = 100
+    var profilePicturePath: String? = null
     private val viewModel: InventoryViewModel by activityViewModels {
         InventoryViewModelFactory(
             (activity?.application as InventoryApplication).database
                 .itemDao()
         )
     }
+
 
     private val navigationArgs: ItemDetailFragmentArgs by navArgs()
 
@@ -58,20 +61,22 @@ class AddItemFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? { _binding = FragmentAddItemBinding.inflate(inflater, container, false)
 
-        //Загружаем фото из галереи
-        imageView = binding.uploadPhoto
-        val getAction = registerForActivityResult(ActivityResultContracts.GetContent(),
-        ActivityResultCallback { uri ->
-            imageView.setImageURI(uri)
-        })
-        binding.btnGallery.setOnClickListener {
-            getAction.launch("image/*")
+       //Загружаем фото из галереи
+        //imageView = binding.uploadPhoto
+       // val getAction = registerForActivityResult(ActivityResultContracts.GetContent(),
+       // ActivityResultCallback { uri ->
+       //     imageView.setImageURI(uri)
+       // })
+       // binding.btnGallery.setOnClickListener {
+       //     getAction.launch("image/*")
+       // }
+
+        binding.uploadPhoto.setOnClickListener{
+            selectProfilePicture()
         }
 
         return binding.root
     }
-
-
 
     /*private fun requestCameraPermission(): Boolean {
         var permissionGranted = false
@@ -155,6 +160,7 @@ class AddItemFragment: Fragment() {
             binding.itemName.text.toString(),
             binding.itemPrice.text.toString(),
             binding.itemCount.text.toString(),
+            binding.uploadPhoto.toString()
         )
     }
 
@@ -175,6 +181,7 @@ class AddItemFragment: Fragment() {
                 binding.itemName.text.toString(),
                 binding.itemPrice.text.toString(),
                 binding.itemCount.text.toString(),
+                binding.uploadPhoto.toString()
             )
             val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
             findNavController().navigate(action)
@@ -188,12 +195,14 @@ class AddItemFragment: Fragment() {
                 this.navigationArgs.itemId,
                 this.binding.itemName.text.toString(),
                 this.binding.itemPrice.text.toString(),
-                this.binding.itemCount.text.toString()
+                this.binding.itemCount.text.toString(),
+                binding.uploadPhoto.toString()
             )
             val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
             findNavController().navigate(action)
         }
     }
+
 
     //Вызывается при создании View
     //Аргумент itemId Navigation определяет элемент редактирования или добавление нового элемента
@@ -225,6 +234,25 @@ class AddItemFragment: Fragment() {
             }
         }*/
 
+    }
+
+    fun selectProfilePicture(){
+        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "image/*"
+        }
+        if (intent.resolveActivity(requireActivity().packageManager) != null){
+            startActivityForResult(intent, REQUEST_IMAGE)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE && resultCode == Activity.RESULT_OK) {
+            val imageUri = data?.data
+
+            profilePicturePath = imageUri.toString()
+            binding.uploadPhoto.setImageURI(data?.data)
+        }
     }
 
     override fun onDestroyView() {

@@ -3,12 +3,14 @@ package android.example.myinventoryapp
 import android.example.myinventoryapp.data.Item
 import android.example.myinventoryapp.data.getFormattedPrice
 import android.example.myinventoryapp.databinding.ItemListItemBinding
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.bumptech.glide.Glide
 
 class ItemListAdapter(private val onItemClicked: (Item) -> Unit) :
     ListAdapter<Item, ItemListAdapter.ItemViewHolder>(DiffCallback) {
@@ -39,7 +41,9 @@ class ItemListAdapter(private val onItemClicked: (Item) -> Unit) :
                 itemName.text = item.itemName
                 itemPrice.text = item.getFormattedPrice()
                 itemQuantity.text = item.quantityInStock.toString()
-                //ivIcon.load(item.itemIcon)
+                ivIcon.setImageURI(Uri.parse(item.itemImage))
+                //ivIcon.setImageURI(Uri.parse(bindProfilePicture(binding.ivIcon, profilePictureUrl = item.itemImage )))
+
             }
         }
     }
