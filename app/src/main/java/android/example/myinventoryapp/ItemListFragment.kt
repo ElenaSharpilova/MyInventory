@@ -1,7 +1,6 @@
 package android.example.myinventoryapp
 
 import android.app.AlertDialog
-import android.example.myinventoryapp.data.Item
 import android.example.myinventoryapp.databinding.ItemListFragmentBinding
 import android.os.Bundle
 import android.view.*

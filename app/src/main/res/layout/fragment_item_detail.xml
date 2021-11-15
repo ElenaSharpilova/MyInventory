@@ -23,7 +23,7 @@
         android:layout_marginTop="@dimen/margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_name"
-        tools:text="100 som" />
+        tools:text="" />
 
     <TextView
         android:id="@+id/item_count_label"
